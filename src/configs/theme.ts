@@ -1,7 +1,9 @@
 export const THEME = {
   primary: {
-    highlight: '#ECA021',
-    success: '#2BCC56'
+    yellow: '#ECA021',
+    green: '#2BCC56',
+    red: '#EF4F40',
+    blue: '#2A8CE7'
   },
   secondary: {
     dark: '#191919',

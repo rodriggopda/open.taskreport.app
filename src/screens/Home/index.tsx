@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableHighlight } from 'react-native'
+import { View, Text, ScrollView, TouchableHighlight, Image } from 'react-native'
 import { Bell, Calendar, Check, ChevronLeft, ChevronRight } from 'lucide-react-native'
 
 import { Screen } from '../../components/layout/Screen'
@@ -84,13 +84,25 @@ export function Home() {
                       ))}
                     </View>
                     <View style={{ marginTop: 14, borderRadius: 8, overflow: 'hidden', backgroundColor: '#FFFFFF05' }}>
-                      <View style={{ height: 8, width: `${project.progress}%`, backgroundColor: THEME.primary.success }} />
+                      <View style={{ height: 8, width: `${project.progress}%`, backgroundColor: THEME.primary.green }} />
                     </View>
                     <Text numberOfLines={3} style={{ marginVertical: 16, fontSize: 16, lineHeight: 24, color: '#FFFFFF' }}>{project.title}</Text>
                   </View>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Calendar size={16} color='#FFFFFF26' />
-                    <Text style={{ fontSize: 14, marginLeft: 4, color: '#FFFFFF', opacity: .5 }}>{new Date().toLocaleString()}</Text>
+                  <View>
+                    <View style={{ marginBottom: 16, flexDirection: 'row', marginLeft: 8, }}>
+                      {
+                        [1, 2, 3, 4].map((user) => (
+                          <Image source={require('../../../assets/jpg/default-user-profile.jpg')} style={{ borderWidth: 1, borderColor: '#FFFFFF5F', marginLeft: -8, width: 32, height: 32, borderRadius: 16 }} key={user} />
+                        ))
+                      }
+                      <View style={{ backgroundColor: THEME.primary.yellow, marginLeft: -8, width: 32, height: 32, borderRadius: 16, alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', }}>2+</Text>
+                      </View>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                      <Calendar size={16} color='#FFFFFF26' />
+                      <Text style={{ fontSize: 14, marginLeft: 4, color: '#FFFFFF', opacity: .5 }}>{new Date().toLocaleString()}</Text>
+                    </View>
                   </View>
                 </View>
               ))
@@ -123,7 +135,7 @@ export function Home() {
                     </View>
                     <Text style={{ marginLeft: 16, color: '#FFFFFF', fontSize: 16 }}>{task.title}</Text>
                   </View>
-                  <View style={{ zIndex: 1, width: task.status === 'DONE' ? '100%' : '0%', height: '100%', position: 'absolute', backgroundColor: THEME.primary.success }} />
+                  <View style={{ zIndex: 1, width: task.status === 'DONE' ? '100%' : '0%', height: '100%', position: 'absolute', backgroundColor: THEME.primary.green }} />
                 </>
               </TouchableHighlight>
             ))

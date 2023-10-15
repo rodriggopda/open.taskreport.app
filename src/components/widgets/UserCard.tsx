@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: THEME.secondary.dark,
     borderRadius: 8,
-    backgroundColor: THEME.primary.success
+    backgroundColor: THEME.primary.green
   },
   profile: {
     width: 56,
