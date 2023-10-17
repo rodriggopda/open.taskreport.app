@@ -6,7 +6,8 @@ export const THEME = {
     blue: '#2A8CE7'
   },
   secondary: {
-    dark: '#191919',
+    dark: '#101010', //191919
+    darkGray: '#181818',
     white: '#FFFFFF',
   },
   sizes: {

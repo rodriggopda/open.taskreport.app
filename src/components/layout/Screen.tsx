@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { THEME } from '../../configs/theme'
@@ -12,9 +12,11 @@ export function Screen({ children }: ScreenProps) {
   return (
     <SafeAreaView>
       <StatusBar backgroundColor={THEME.secondary.dark} />
-      <View style={styles.screen}>
-        {children}
-      </View>
+      <ScrollView>
+        <View style={styles.screen}>
+          {children}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
