@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableHighlight, View, ViewStyle } from "react-native"
-import { ChevronRight } from "lucide-react-native";
+import { Check, ChevronRight } from "lucide-react-native";
 import { THEME } from "../../configs/theme";
 import { Task } from "../../types/task";
+import { ListItem, makeStyles } from "@rneui/base";
+import { createTheme, useTheme } from "@rneui/themed";
 
 export type TaskListProps = {
   tasks: Task[];
@@ -81,14 +83,7 @@ export function TaskList() {
     setTranslateX(-100)
   }
 
-  const taskContainer = (): StyleProp<ViewStyle> => {
-    return {
-      // transform: [{ translateX }],
-      overflow: 'hidden',
-      borderRadius: 16,
-      backgroundColor: THEME.secondary.darkGray,
-    }
-  }
+  const { theme } = useTheme()
 
   return (
     <View style={styles.taskListContainer}>
@@ -108,23 +103,36 @@ export function TaskList() {
       <View style={styles.taskList}>
         {
           tasks.map((task, index) => (
-            <View onTouchMove={() => handleDisplayActions()} style={taskContainer()} key={task.id}>
-              <>
-                <View style={styles.taskView}>
-                  <View>
-                    <View style={styles.taskDateAndPriority}>
-                      <Text style={styles.taskDate}>{new Date().toLocaleDateString()}</Text>
-                      <Text style={taskPriorityFlag(task.priorityLevel)}>{priorityLevels[task.priorityLevel].label}</Text>
+            <ListItem.Swipeable
+              key={task.id}
+              theme={theme}
+              style={styles.taskContainer}
+              rightContent={() => (
+                <View style={styles.taskActionButtonContainer}>
+                  <TouchableHighlight style={styles.taskActionButton} onPress={() => { }}>
+                    <View style={styles.taskActionButtonContent}>
+                      <Check size={24} color={THEME.secondary.white} />
+                      <Text style={styles.taskActionButtonTitle}>Concluir</Text>
                     </View>
-                    <Text style={styles.taskTitle}>{task.title}</Text>
-                  </View>
-                  {/* <TouchableHighlight onPress={() => { handleTasks(task, index) }} style={styles.taskCheckButton}>
-                    {task.status === 'DONE' ? <Check size={16} strokeWidth={3} color='#FFFFFF' /> : <></>}
-                  </TouchableHighlight> */}
+                  </TouchableHighlight>
                 </View>
-                <View style={taskStatus(task.status)} />
-              </>
-            </View>
+              )}
+            >
+              <View key={task.id}>
+                <>
+                  <View style={styles.taskView}>
+                    <View>
+                      <View style={styles.taskDateAndPriority}>
+                        <Text style={styles.taskDate}>{new Date().toLocaleDateString()}</Text>
+                        <Text style={taskPriorityFlag(task.priorityLevel)}>{priorityLevels[task.priorityLevel].label}</Text>
+                      </View>
+                      <Text style={styles.taskTitle}>{task.title}</Text>
+                    </View>
+                  </View>
+                  <View style={taskStatus(task.status)} />
+                </>
+              </View>
+            </ListItem.Swipeable>
           ))
         }
       </View>
@@ -158,16 +166,17 @@ const styles = StyleSheet.create({
     gap: 8,
     marginTop: 16,
   },
-  /* taskContainer: {
+  taskContainer: {
+    width: '100%',
     overflow: 'hidden',
     borderRadius: 16,
-    backgroundColor: THEME.secondary.darkGray,
-  }, */
+    // backgroundColor: THEME.secondary.darkGray,
+  },
   taskView: {
     zIndex: 2,
-    padding: 20,
-    paddingTop: 16,
-    paddingBottom: 16,
+    // padding: 20,
+    // paddingTop: 16,
+    // paddingBottom: 16,
     position: 'relative',
     alignItems: 'center',
     flexDirection: 'row',
@@ -193,5 +202,29 @@ const styles = StyleSheet.create({
     color: '#FFFFFF5f',
     marginRight: 8,
     fontSize: 14,
+  },
+  taskActionButtonContainer: {
+    padding: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  taskActionButton: {
+    borderBottomRightRadius: 16,
+    borderTopRightRadius: 16,
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  taskActionButtonContent: {
+    borderRadius: 12,
+    paddingTop: 4,
+    paddingBottom: 4,
+    backgroundColor: THEME.primary.blue,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  taskActionButtonTitle: {
+    color: THEME.secondary.white,
+    fontSize: 16
   }
 })
