@@ -12,7 +12,7 @@ export function UserCard() {
 
   return (
     <View style={styles.cardContainer}>
-      <Image style={styles.profile} source={require('../../../assets/jpg/default-user-profile.jpg')} />
+      <Image style={styles.profile} source={{ uri: 'https://robohash.org/rodriggopda.png?set=set5&size=126x126' }} />
       <View style={styles.indicator} />
       <View>
         <Text style={styles.basicText}>{currentPeriod()}</Text>
@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     marginRight: 24,
-    borderRadius: 32
+    borderRadius: 32,
+    backgroundColor: THEME.primary.yellow,
   },
   basicText: {
     color: '#FFFFFF',

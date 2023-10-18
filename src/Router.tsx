@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator()
 
 export function Router() {
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       <Stack.Navigator screenOptions={{
         headerShown: false
       }}>
