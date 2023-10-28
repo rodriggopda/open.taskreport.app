@@ -1,13 +1,14 @@
-import { useState } from "react";
-import { StyleProp, StyleSheet, Text, TextStyle, TouchableHighlight, View, ViewStyle } from "react-native"
-import { Check, ChevronRight } from "lucide-react-native";
-import { THEME } from "../../configs/theme";
-import { Task } from "../../types/task";
-import { ListItem, makeStyles } from "@rneui/base";
-import { createTheme, useTheme } from "@rneui/themed";
+import { useState } from 'react'
+import { StyleProp, StyleSheet, Text, TextStyle, TouchableHighlight, View, ViewStyle } from 'react-native'
+import { Check, ChevronRight } from 'lucide-react-native'
+import { ListItem } from '@rneui/base'
+import { useTheme } from '@rneui/themed'
+
+import { THEME } from '../../configs/theme'
+import { Task } from '../../configs/types/task'
 
 export type TaskListProps = {
-  tasks: Task[];
+  tasks: Task[]
 }
 
 export function TaskList() {
@@ -18,34 +19,38 @@ export function TaskList() {
       id: '1',
       title: 'Construir componentes base',
       status: 'OPENED',
-      priorityLevel: 4
+      priorityLevel: 4,
+      createdBy: 'Rodrigo Andrade'
     },
     {
       id: '2',
       title: 'Compilar referências de UI',
       status: 'OPEN',
-      priorityLevel: 3
+      priorityLevel: 3,
+      createdBy: 'Rodrigo Andrade'
     },
     {
       id: '3',
       title: 'Criar identidade visual',
       status: 'OPEN',
-      priorityLevel: 3
+      priorityLevel: 3,
+      createdBy: 'Rodrigo Andrade'
     },
     {
       id: '4',
       title: 'Setup do projeto em react-native',
       status: 'OPEN',
-      priorityLevel: 2
+      priorityLevel: 2,
+      createdBy: 'Rodrigo Andrade'
     }
   ])
 
-  const priorityLevels: Array<{ color: string, label: string }> = [
+  const priorityLevels: Array<{ color: string; label: string }> = [
     { color: '', label: '' },
     { color: THEME.primary.blue, label: 'Baixa' },
     { color: THEME.primary.green, label: 'Média' },
     { color: THEME.primary.yellow, label: 'Alta' },
-    { color: THEME.primary.red, label: 'Urgente' },
+    { color: THEME.primary.red, label: 'Urgente' }
   ]
 
   const taskStatus = (status: string): StyleProp<ViewStyle> => {
@@ -55,7 +60,7 @@ export function TaskList() {
       zIndex: 1,
       height: '100%',
       position: 'absolute',
-      backgroundColor: THEME.primary.blue + '25',
+      backgroundColor: THEME.primary.blue + '25'
     }
   }
 
@@ -65,7 +70,7 @@ export function TaskList() {
       textAlign: 'center',
       fontSize: 12,
       fontWeight: 'bold',
-      borderRadius: 16,
+      borderRadius: 16
     }
   }
 
@@ -89,52 +94,46 @@ export function TaskList() {
     <View style={styles.taskListContainer}>
       <View style={styles.taskListContainerHeader}>
         <View>
-          <Text style={styles.taskListTitle}>
-            Tarefas do dia
-          </Text>
-          <Text style={styles.taskListDescription}>
-            Você tem 4 tarefas pendentes
-          </Text>
+          <Text style={styles.taskListTitle}>Tarefas do dia</Text>
+          <Text style={styles.taskListDescription}>Você tem 4 tarefas pendentes</Text>
         </View>
-        <TouchableHighlight onPress={() => { }} style={styles.taskListHeaderButton}>
+        <TouchableHighlight onPress={() => {}} style={styles.taskListHeaderButton}>
           <ChevronRight size={24} color='#FFFFFF55' />
         </TouchableHighlight>
       </View>
       <View style={styles.taskList}>
-        {
-          tasks.map((task, index) => (
-            <ListItem.Swipeable
-              key={task.id}
-              theme={theme}
-              style={styles.taskContainer}
-              rightContent={() => (
-                <View style={styles.taskActionButtonContainer}>
-                  <TouchableHighlight style={styles.taskActionButton} onPress={() => { }}>
-                    <View style={styles.taskActionButtonContent}>
-                      <Check size={24} color={THEME.secondary.white} />
-                      <Text style={styles.taskActionButtonTitle}>Concluir</Text>
-                    </View>
-                  </TouchableHighlight>
-                </View>
-              )}
-            >
-              <View key={task.id}>
-                <>
-                  <View style={styles.taskView}>
-                    <View>
-                      <View style={styles.taskDateAndPriority}>
-                        <Text style={styles.taskDate}>{new Date().toLocaleDateString()}</Text>
-                        <Text style={taskPriorityFlag(task.priorityLevel)}>{priorityLevels[task.priorityLevel].label}</Text>
-                      </View>
-                      <Text style={styles.taskTitle}>{task.title}</Text>
-                    </View>
+        {tasks.map((task, index) => (
+          <ListItem.Swipeable
+            key={task.id}
+            theme={theme}
+            style={styles.taskContainer}
+            rightContent={() => (
+              <View style={styles.taskActionButtonContainer}>
+                <TouchableHighlight style={styles.taskActionButton} onPress={() => {}}>
+                  <View style={styles.taskActionButtonContent}>
+                    <Check size={24} color={THEME.secondary.white} />
+                    <Text style={styles.taskActionButtonTitle}>Concluir</Text>
                   </View>
-                  <View style={taskStatus(task.status)} />
-                </>
+                </TouchableHighlight>
               </View>
-            </ListItem.Swipeable>
-          ))
-        }
+            )}
+          >
+            <View key={task.id}>
+              <>
+                <View style={styles.taskView}>
+                  <View>
+                    <View style={styles.taskDateAndPriority}>
+                      <Text style={styles.taskDate}>{new Date().toLocaleDateString()}</Text>
+                      <Text style={taskPriorityFlag(task.priorityLevel)}>{priorityLevels[task.priorityLevel].label}</Text>
+                    </View>
+                    <Text style={styles.taskTitle}>{task.title}</Text>
+                  </View>
+                </View>
+                <View style={taskStatus(task.status)} />
+              </>
+            </View>
+          </ListItem.Swipeable>
+        ))}
       </View>
     </View>
   )
@@ -142,34 +141,34 @@ export function TaskList() {
 
 const styles = StyleSheet.create({
   taskListContainer: {
-    marginTop: 40,
+    marginTop: 40
   },
   taskListContainerHeader: {
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   taskListHeaderButton: {
     padding: 4,
-    borderRadius: 8,
+    borderRadius: 8
   },
   taskListTitle: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 16
   },
   taskListDescription: {
     color: '#FFFFFF50',
     fontSize: 14,
-    marginTop: 8,
+    marginTop: 8
   },
   taskList: {
     gap: 8,
-    marginTop: 16,
+    marginTop: 16
   },
   taskContainer: {
     width: '100%',
     overflow: 'hidden',
-    borderRadius: 16,
+    borderRadius: 16
     // backgroundColor: THEME.secondary.darkGray,
   },
   taskView: {
@@ -180,7 +179,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   taskCheckButton: {
     width: 20,
@@ -188,12 +187,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 8,
     justifyContent: 'center',
-    backgroundColor: '#FFFFFF09',
+    backgroundColor: '#FFFFFF09'
   },
   taskTitle: {
     color: '#FFFFFF',
     fontSize: 16,
-    marginTop: 8,
+    marginTop: 8
   },
   taskDateAndPriority: {
     flexDirection: 'row'
@@ -201,18 +200,18 @@ const styles = StyleSheet.create({
   taskDate: {
     color: '#FFFFFF5f',
     marginRight: 8,
-    fontSize: 14,
+    fontSize: 14
   },
   taskActionButtonContainer: {
     padding: 8,
     paddingLeft: 16,
-    paddingRight: 16,
+    paddingRight: 16
   },
   taskActionButton: {
     borderBottomRightRadius: 16,
     borderTopRightRadius: 16,
     borderRadius: 12,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   taskActionButtonContent: {
     borderRadius: 12,

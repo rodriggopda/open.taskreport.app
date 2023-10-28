@@ -3,5 +3,6 @@
   "jsxSingleQuote": true,
   "arrowParens": "always",
   "trailingComma": "none",
-  "semi": false
+  "semi": false,
+  "printWidth": 160
 }

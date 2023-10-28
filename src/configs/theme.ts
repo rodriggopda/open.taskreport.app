@@ -1,4 +1,3 @@
-import * as Elements from '@rneui/base'
 import { createTheme } from '@rneui/themed'
 
 export interface CustomTheme {
