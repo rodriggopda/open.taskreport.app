@@ -3,11 +3,23 @@ import { ResizeMode, Video } from 'expo-av'
 
 import { THEME } from '../../configs/theme'
 import { StatusBar } from 'expo-status-bar'
+import { useEffect } from 'react'
+import { Navigation } from '../../configs/types/navigation'
+import { init } from '../../infra/database/setup'
 
-export function Start() {
+export function Start({ navigation }: Navigation) {
+
+  useEffect(() => {
+    Promise.resolve(init())
+      .then(() => {
+        setTimeout(() => {
+          navigation.replace('Home')
+        }, 5000)
+      })
+  }, [])
 
   return (
-    <View style={{ position: 'relative',maxWidth: Dimensions.get('screen').width,  maxHeight: Dimensions.get('screen').height, backgroundColor: THEME.secondary.dark, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ position: 'relative', maxWidth: Dimensions.get('screen').width, maxHeight: Dimensions.get('screen').height, backgroundColor: THEME.secondary.dark, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <StatusBar backgroundColor='transparent' />
       <Video
         resizeMode={ResizeMode.COVER}

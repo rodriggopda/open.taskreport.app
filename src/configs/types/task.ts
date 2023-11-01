@@ -4,5 +4,6 @@ export type Task = {
   description?: string
   status: string
   priorityLevel: number
-  createdBy: string
+  startAt?: Date
+  endAt?: Date
 }

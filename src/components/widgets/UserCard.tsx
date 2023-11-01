@@ -1,7 +1,18 @@
+import { useEffect, useState } from 'react'
 import { View, Image, Text, StyleSheet } from 'react-native'
+
+import { query } from '../../infra/database/query'
+
 import { THEME } from '../../configs/theme'
+import { User } from '../../configs/types/user'
 
 export function UserCard() {
+  const [user, setUser] = useState<User>()
+  useEffect(() => {
+    query.findOne<User>('SELECT * FROM User WHERE id = ?', ['655e57b3-2864-4c36-a876-ca437fe58902']).then(({ data }) => {
+      setUser(undefined)
+    })
+  }, [])
 
   function currentPeriod() {
     const currentHour = new Date().getHours()
@@ -14,10 +25,13 @@ export function UserCard() {
     <View style={styles.cardContainer}>
       <Image style={styles.profile} source={{ uri: 'https://robohash.org/rodriggopda.png?set=set5&size=126x126' }} />
       <View style={styles.indicator} />
-      <View>
-        <Text style={styles.basicText}>{currentPeriod()}</Text>
-        <Text style={styles.userNameText}>Rodrigo Andrade</Text>
-      </View>
+      {
+        user ?
+          <View>
+            <Text style={styles.basicText}>{currentPeriod()}</Text>
+            <Text style={styles.userNameText}>{user?.name || user?.username}</Text>
+          </View> :
+          <Text style={styles.userNameText}>{currentPeriod()?.replace(',', '')}</Text>}
     </View>
   )
 }

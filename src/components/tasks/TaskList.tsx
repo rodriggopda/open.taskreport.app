@@ -97,7 +97,7 @@ export function TaskList() {
           <Text style={styles.taskListTitle}>Tarefas do dia</Text>
           <Text style={styles.taskListDescription}>Você tem 4 tarefas pendentes</Text>
         </View>
-        <TouchableHighlight onPress={() => {}} style={styles.taskListHeaderButton}>
+        <TouchableHighlight onPress={() => { }} style={styles.taskListHeaderButton}>
           <ChevronRight size={24} color='#FFFFFF55' />
         </TouchableHighlight>
       </View>
@@ -109,7 +109,7 @@ export function TaskList() {
             style={styles.taskContainer}
             rightContent={() => (
               <View style={styles.taskActionButtonContainer}>
-                <TouchableHighlight style={styles.taskActionButton} onPress={() => {}}>
+                <TouchableHighlight style={styles.taskActionButton} onPress={() => { }}>
                   <View style={styles.taskActionButtonContent}>
                     <Check size={24} color={THEME.secondary.white} />
                     <Text style={styles.taskActionButtonTitle}>Concluir</Text>
@@ -208,8 +208,6 @@ const styles = StyleSheet.create({
     paddingRight: 16
   },
   taskActionButton: {
-    borderBottomRightRadius: 16,
-    borderTopRightRadius: 16,
     borderRadius: 12,
     overflow: 'hidden'
   },
