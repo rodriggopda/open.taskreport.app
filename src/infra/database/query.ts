@@ -21,20 +21,6 @@ function validateArgs(query: string, args?: any) {
 function queryResolve<T>(query: string, args?: any) {
   validateArgs(query, args)
   return new Promise<QueryResponse<T>>((resolve, reject) => {
-    db.transaction(
-      (tx) => {
-        tx.executeSql(query, [...(args || '')], (_, { insertId, rows, rowsAffected }) => {
-          resolve({
-            lastId: insertId || null,
-            data: rows._array as T,
-            rowsAffected
-          })
-        })
-      },
-      (e) => {
-        console.log('Query error: ', e)
-        reject(`Query error: ${query}`)
-      }
-    )
+    db.runAsync(`${query}`, ...(args || ''))
   })
 }

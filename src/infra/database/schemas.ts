@@ -4,7 +4,7 @@ export const userSchema = `
     name VARCHAR(255),
     username VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
-  )
+  );
 `
 
 export const projectSchema = `
@@ -15,7 +15,7 @@ export const projectSchema = `
     startAt TEXT,
     deadline TEXT,
     PRIMARY KEY (id)
-  )
+  );
 `
 
 export const taskSchema = `
@@ -28,7 +28,7 @@ export const taskSchema = `
     startAt TEXT NOT NULL,
     endAt TEXT NOT NULL,
     PRIMARY KEY (id)
-  )
+  );
 `
 
 export const sprintSchema = `
@@ -38,5 +38,5 @@ export const sprintSchema = `
     startAt TEXT NOT NULL,
     endAt TEXT NOT NULL,
     PRIMARY KEY (id)
-  )
+  );
 `

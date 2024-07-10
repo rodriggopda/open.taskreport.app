@@ -26,9 +26,9 @@ export function Start({ navigation }: Navigation) {
         shouldPlay
         source={require('../../../assets/mp4/entering-open-task-report-fhd.mp4')}
         style={{ width: Dimensions.get('screen').width, flex: 1 }} />
-      {/*<Text>Welcome to Open Task Report</Text>
+      {/* <Text>Welcome to Open Task Report</Text>
       <View style={{ marginTop: 20 }} />
-      <ActivityIndicator size='large' color={THEME.primary.yellow} />*/}
+      <ActivityIndicator size='large' color={THEME.primary.yellow} /> */}
       <ActivityIndicator style={{ position: 'absolute', bottom: 30 }} size='large' color={THEME.primary.yellow} />
     </View>
   )
